@@ -1,9 +1,12 @@
 package in.ankitsrivastava.mynotes;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,9 +14,12 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +28,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        String title = "";
+        Cursor resultSet = createOrGetDatabase().rawQuery("Select * from NOTES",null);
+        while(resultSet.moveToNext()){
+            title = title + ", " + resultSet.getString(1);
+        }
+        Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
+
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "To add activity", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, CreateNoteActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -48,4 +63,17 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private SQLiteDatabase createOrGetDatabase(){
+        SQLiteDatabase notesDB = openOrCreateDatabase("NOTES_DB", MODE_PRIVATE, null);
+        notesDB.execSQL("CREATE TABLE IF NOT EXISTS NOTES " +
+                "(ID INTEGER PRIMARY KEY AUTOINCREMENT,Title VARCHAR,Content VARCHAR);");
+        return notesDB;
+    }
+
+    /*Cursor resultSet = notesDB.rawQuery("Select * from NOTES",null);
+        resultSet.moveToFirst();
+        String title = resultSet.getString(0);
+        String content = resultSet.getString(1);
+        Toast.makeText(this, title + " : " + content, Toast.LENGTH_SHORT).show();*/
 }

@@ -8,12 +8,27 @@
     android:visibility="visible"
     tools:context=".CreateNoteFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_create"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
         android:hint="Title"
+        android:id="@+id/create_title"
         android:textColor="@android:color/darker_gray"
         android:textColorHint="#757575"
         android:textSize="35dp"
@@ -32,6 +47,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="120dp"
         android:hint="Content"
+        android:id="@+id/create_content"
         android:textColor="@android:color/white"
         android:textColorHint="#757575"
         android:textSize="20dp" />
