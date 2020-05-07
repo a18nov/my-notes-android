@@ -11,8 +11,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,13 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
     CustomAdapter adapter;
-    GridView gv;
+    GridView gridView;
     SQLiteDatabase notesDB;
 
     @Override
@@ -113,11 +110,19 @@ public class MainActivity extends AppCompatActivity {
                 mainTitle.setText("");
                 mainDesc.setText("");
                 mainImage.setVisibility(View.GONE);
-                gv= (GridView) mainView.findViewById(R.id.gv);
 
-                adapter=new CustomAdapter(this, getData());
-                gv.setAdapter(adapter);
+                gridView = (GridView) mainView.findViewById(R.id.gv);
+
+                adapter = new CustomAdapter(this, getData());
+                gridView.setAdapter(adapter);
             }
+        } else {
+            ImageView mainImage = mainView.findViewById(R.id.mainpage_img);
+            TextView mainTitle = mainView.findViewById(R.id.textview_first);
+            TextView mainDesc = mainView.findViewById(R.id.mainpage_desc);
+            mainTitle.setText("Documenting makes life \\n better.");
+            mainDesc.setText("Tap the bottom right button to create a note.");
+            mainImage.setVisibility(View.VISIBLE);
         }
     }
 

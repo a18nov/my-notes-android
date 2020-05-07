@@ -36,6 +36,7 @@ public class OpenNoteActivity extends AppCompatActivity {
         titleText = (EditText) findViewById(R.id.open_title);
         contentText = (EditText) findViewById(R.id.open_content);
         Intent intent = getIntent();
+
         mId = intent.getIntExtra("id", 0);
         mTitle = intent.getStringExtra("title");
         mContent = intent.getStringExtra("content");

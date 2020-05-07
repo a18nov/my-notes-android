@@ -1,23 +1,21 @@
 package in.ankitsrivastava.mynotes;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class CustomAdapter extends BaseAdapter {
-    Context c;
+    Context mainActivityContext;
     ArrayList<NoteValue> notes;
 
-    public CustomAdapter(Context c, ArrayList<NoteValue> notes) {
-        this.c = c;
+    public CustomAdapter(Context mainActivityContext, ArrayList<NoteValue> notes) {
+        this.mainActivityContext = mainActivityContext;
         this.notes = notes;
     }
 
@@ -40,24 +38,24 @@ public class CustomAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view==null)
         {
-            view= LayoutInflater.from(c).inflate(R.layout.card_model,viewGroup,false);
+            view= LayoutInflater.from(mainActivityContext).inflate(R.layout.card_model,viewGroup,false);
         }
 
         final NoteValue s= (NoteValue) this.getItem(i);
 
-        TextView nameTxt= (TextView) view.findViewById(R.id.card_title);
-        TextView propTxt= (TextView) view.findViewById(R.id.card_content);
+        TextView titleText= (TextView) view.findViewById(R.id.card_title);
+        TextView contentText= (TextView) view.findViewById(R.id.card_content);
 
         //BIND
-        nameTxt.setText(s.getTitle());
-        propTxt.setText(s.getContent());
+        titleText.setText(s.getTitle());
+        contentText.setText(s.getContent());
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (c instanceof MainActivity) {
+                if (mainActivityContext instanceof MainActivity) {
                     Log.e("function", "getView - CustomAdapter");
-                      ((MainActivity)c).startOpenNoteActivity(s.getId(), s.getTitle(), s.getContent());
+                      ((MainActivity) mainActivityContext).startOpenNoteActivity(s.getId(), s.getTitle(), s.getContent());
                 }
             }
         });
