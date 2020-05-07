@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainPageFragment"
+    android:id="@+id/mainpage"
     android:background="@android:color/black">
 
     <TextView
@@ -20,6 +21,7 @@
         />
 
     <TextView
+        android:id="@+id/mainpage_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tap the bottom right button to create a note."
@@ -30,11 +32,20 @@
         android:layout_marginLeft="85dp"/>
 
     <ImageView
+        android:id="@+id/mainpage_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/notes"
         android:layout_marginTop="380dp"
         android:layout_marginLeft="160dp"/>
+
+    <GridView
+        android:id="@+id/gv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:numColumns="2"/>
 
 
 

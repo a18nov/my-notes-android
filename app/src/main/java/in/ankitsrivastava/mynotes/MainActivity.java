@@ -11,15 +11,24 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
+    CustomAdapter adapter;
+    GridView gv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         while(resultSet.moveToNext()){
             title = title + ", " + resultSet.getString(1);
         }
+
+
         Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
 
 
@@ -71,9 +82,42 @@ public class MainActivity extends AppCompatActivity {
         return notesDB;
     }
 
-    /*Cursor resultSet = notesDB.rawQuery("Select * from NOTES",null);
-        resultSet.moveToFirst();
-        String title = resultSet.getString(0);
-        String content = resultSet.getString(1);
-        Toast.makeText(this, title + " : " + content, Toast.LENGTH_SHORT).show();*/
+    private int getRowCount(SQLiteDatabase notesDB){
+        Cursor resultSet = notesDB.rawQuery("Select * from NOTES",null);
+        int i = 0;
+        while(resultSet.moveToNext()){
+            i++;
+        }
+        return i;
+    }
+
+    private ArrayList<NoteValue> getData(){
+        ArrayList<NoteValue> notes = new ArrayList<>();
+        Cursor resultSet = createOrGetDatabase().rawQuery("Select * from NOTES",null);
+        while(resultSet.moveToNext()){
+            NoteValue note = new NoteValue();
+            note.setId(Integer.parseInt(resultSet.getString(0)));
+            note.setTitle(resultSet.getString(1));
+            note.setContent(resultSet.getString(2));
+            notes.add(note);
+        }
+        return notes;
+    }
+
+    public void startMainStuff(View mainView){
+        if(getRowCount(createOrGetDatabase()) > 0){
+            if(mainView != null){
+                ImageView mainImage = mainView.findViewById(R.id.mainpage_img);
+                TextView mainTitle = mainView.findViewById(R.id.textview_first);
+                TextView mainDesc = mainView.findViewById(R.id.mainpage_desc);
+                mainTitle.setText("");
+                mainDesc.setText("");
+                mainImage.setVisibility(View.GONE);
+                gv= (GridView) mainView.findViewById(R.id.gv);
+
+                adapter=new CustomAdapter(this, getData());
+                gv.setAdapter(adapter);
+            }
+        }
+    }
 }
