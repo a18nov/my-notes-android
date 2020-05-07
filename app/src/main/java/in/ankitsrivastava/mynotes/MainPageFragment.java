@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 
 public class MainPageFragment extends Fragment {
 
+    View mView;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -26,12 +28,21 @@ public class MainPageFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        this.mView = view;
+        runMainStuff(view);
+    }
 
+    public void runMainStuff(View view){
         Activity activity = getActivity();
         if(activity instanceof MainActivity){
             MainActivity myactivity = (MainActivity) activity;
             myactivity.startMainStuff(view);
         }
-        //Main Page Fragment
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        runMainStuff(mView);
     }
 }

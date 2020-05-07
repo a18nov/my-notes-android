@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     CustomAdapter adapter;
     GridView gv;
+    SQLiteDatabase notesDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +38,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String title = "";
-        Cursor resultSet = createOrGetDatabase().rawQuery("Select * from NOTES",null);
-        while(resultSet.moveToNext()){
-            title = title + ", " + resultSet.getString(1);
-        }
-
-
-        Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
-
+        notesDB = createOrGetDatabase();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +84,13 @@ public class MainActivity extends AppCompatActivity {
         return i;
     }
 
+    public void updateContent(int id, String title, String content){
+        ContentValues cv = new ContentValues();
+        cv.put("Title", title);
+        cv.put("Content", content);
+        notesDB.update("NOTES", cv, "id="+id, null);
+    }
+
     private ArrayList<NoteValue> getData(){
         ArrayList<NoteValue> notes = new ArrayList<>();
         Cursor resultSet = createOrGetDatabase().rawQuery("Select * from NOTES",null);
@@ -119,5 +119,13 @@ public class MainActivity extends AppCompatActivity {
                 gv.setAdapter(adapter);
             }
         }
+    }
+
+    public void startOpenNoteActivity(int id, String title, String content){
+        Intent intent = new Intent(MainActivity.this, OpenNoteActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("title", title);
+        intent.putExtra("content", content);
+        startActivity(intent);
     }
 }

@@ -1,6 +1,8 @@
 package in.ankitsrivastava.mynotes;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +55,10 @@ public class CustomAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(c, s.getTitle(), Toast.LENGTH_SHORT).show();
+                if (c instanceof MainActivity) {
+                    Log.e("function", "getView - CustomAdapter");
+                      ((MainActivity)c).startOpenNoteActivity(s.getId(), s.getTitle(), s.getContent());
+                }
             }
         });
 
