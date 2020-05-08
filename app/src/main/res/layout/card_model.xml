@@ -3,10 +3,12 @@
     xmlns:card_view="http://schemas.Android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
-    card_view:cardCornerRadius="4dp"
+    app:cardCornerRadius="10dp"
     card_view:cardBackgroundColor="#AA66CC"
     card_view:cardElevation="10dp"
+    app:cardBackgroundColor="#202020"
     android:id="@+id/cv">
 
     <RelativeLayout
@@ -17,8 +19,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:textColor="@android:color/white"
             android:id="@+id/card_title"
             android:text="Title Title"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:textSize="19dp"
+            android:layout_marginTop="10dp"
             />
 
         <TextView
@@ -26,7 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="40dp"
-            android:text="Content Content" />
+            android:text="Content Content"
+            android:layout_marginLeft="20dp"
+            android:textColor="#505050"
+            android:textSize="12dp"/>
 
     </RelativeLayout>
 

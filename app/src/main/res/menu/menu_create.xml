@@ -6,6 +6,6 @@
         android:id="@+id/add_note"
         android:title="Add Note"
         android:orderInCategory="100"
-        android:icon="@android:drawable/ic_input_add"
+        android:icon="@drawable/ic_check_mark"
         app:showAsAction="always" />
 </menu>
