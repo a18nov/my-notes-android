@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/open_delete"
+        android:title="Delete Note"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_delete"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/open_add_note"
+        android:title="Save note"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_check_mark"
+        app:showAsAction="always" />
+</menu>

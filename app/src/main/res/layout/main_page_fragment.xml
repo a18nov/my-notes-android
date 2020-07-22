@@ -1,21 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainPageFragment">
+    tools:context=".MainPageFragment"
+    android:id="@+id/mainpage"
+    android:background="@android:color/black">
 
     <TextView
         android:id="@+id/textview_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_first_fragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Documenting makes life \n better."
+        android:textColor="@android:color/white"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="60dp"
+        android:textSize="25dp"
+        android:textAlignment="gravity"
+        />
+
+    <TextView
+        android:id="@+id/mainpage_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tap the bottom right button to create a note."
+        android:textAlignment="gravity"
+        android:textColor="#757575"
+        android:layout_marginTop="310dp"
+        android:textSize="12dp"
+        android:layout_marginLeft="85dp"/>
+
+    <ImageView
+        android:id="@+id/mainpage_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/notes"
+        android:layout_marginTop="380dp"
+        android:layout_marginLeft="160dp"/>
+
+    <GridView
+        android:id="@+id/gv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
+        android:numColumns="2"/>
+
+
 
     <!-- Ye Main Page hai jaha pe wo ladka khada hai -->
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</RelativeLayout>
